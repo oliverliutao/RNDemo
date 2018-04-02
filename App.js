@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import ApiUtils from './src/ApiUtils'
 import {
   Platform,
   StyleSheet,
@@ -13,17 +14,31 @@ import {
 } from 'react-native';
 
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+
+function getFetch() {
+
+   fetch('https://facebook.github.io/react-native/movies.json')
+   .then(ApiUtils.checkStatus)
+  .then(response => {
+    const statusCode = response.status;
+    const data = response.json();
+    return {codekey: statusCode, datakey: data};
+  })
+  .then(res => {
+    console.log(res.codekey);
+    console.log(res.datakey);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+
+}
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
-    console.log("this is for test");
+
+    getFetch();
 
     return (
       <View style={styles.container}>
@@ -31,7 +46,7 @@ export default class App extends Component<Props> {
           taoliu huang
         </Text>
         <Text style={styles.instructions}>
-          second line
+          second
         </Text>
       </View>
     );

@@ -2,6 +2,9 @@ package com.rndemo;
 
 import com.facebook.react.ReactActivity;
 
+import android.os.Bundle;
+import android.util.Log;
+
 public class MainActivity extends ReactActivity {
 
     /**
@@ -12,4 +15,13 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "RNDemo";
     }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.v("MainActivity", "MainActivity ---- onCreate");
+    }
+
 }
